@@ -1,0 +1,6 @@
+hu\inf\unideb\Controller.class
+hu\inf\unideb\FXMLController.class
+hu\inf\unideb\MainApp.class
+hu\inf\unideb\model\Parking.class
+hu\inf\unideb\model\ParkingSpaceDAO.class
+hu\inf\unideb\model\ParkingSpace.class
