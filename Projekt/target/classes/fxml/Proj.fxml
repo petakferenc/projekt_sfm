@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1020.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.inf.unideb.FXMLController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1020.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.inf.unideb.FXMLController">
     <tabs>
         <Tab style="-fx-pref-width: 334px;" text="Bemenő panel">
             <content>
@@ -29,6 +29,18 @@
                 </AnchorPane>
             </content>
         </Tab>
+        <Tab style="-fx-pref-width: 334px;" text="Rendszergazdai panel">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="apane" stylesheets="@project.css">
+               <children>
+                  <Button layoutX="47.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleLogButtonPushed" text="Log fájl megnyitása" />
+                  <Button layoutX="47.0" layoutY="89.0" mnemonicParsing="false" onAction="#addPassButton" text="Bérlet hozzáadása" />
+                  <Button layoutX="47.0" layoutY="138.0" mnemonicParsing="false" onAction="#blackListButton" text="Fekete lista" />
+                  <TextField fx:id="addPass" layoutX="253.0" layoutY="93.0" />
+               </children>
+                </AnchorPane>
+            </content>
+        </Tab>
         <Tab style="-fx-pref-width: 334px;" text="Kimenő panel">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="apane" stylesheets="@project.css">
@@ -41,18 +53,6 @@
                    <Pane layoutX="798.0" layoutY="61.0" opacity="0.11" prefHeight="109.0" prefWidth="71.0" style="-fx-background-color: black; -fx-border-radius: 20px; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 20px;" />
                    <Label fx:id="fee" layoutX="365.0" layoutY="267.0" prefHeight="44.0" prefWidth="291.0" style="-fx-background-color: white; -fx-alignment: center;" text="Fizetendő: 1540 Ft" />
                </children></AnchorPane>
-            </content>
-        </Tab>
-        <Tab style="-fx-pref-width: 334px;" text="Rendszergazdai panel">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="apane" stylesheets="@project.css">
-               <children>
-                  <Button layoutX="47.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleLogButtonPushed" text="Log fájl megnyitása" />
-                  <Button layoutX="47.0" layoutY="89.0" mnemonicParsing="false" onAction="#addPassButton" text="Bérlet hozzáadása" />
-                  <Button layoutX="47.0" layoutY="138.0" mnemonicParsing="false" onAction="#blackListButton" text="Fekete lista" />
-                  <TextField fx:id="addPass" layoutX="253.0" layoutY="93.0" />
-               </children>
-                </AnchorPane>
             </content>
         </Tab>
     </tabs>
