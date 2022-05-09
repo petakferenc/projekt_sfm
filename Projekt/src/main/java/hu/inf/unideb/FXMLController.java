@@ -62,6 +62,7 @@ public class FXMLController implements Initializable {
         });
         thread.start();
     }
+
     private void Loading(){
         Thread thread = new Thread(() -> {
 
@@ -93,6 +94,7 @@ public class FXMLController implements Initializable {
         greenCircle.setFill(Color.valueOf("#948a89"));
         Timenow();
     }
+
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
         progressBar.setProgress(0);
