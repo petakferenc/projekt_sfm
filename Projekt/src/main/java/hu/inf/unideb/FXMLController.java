@@ -3,6 +3,7 @@ package hu.inf.unideb;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -97,6 +98,24 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
+
+        try(JPA_IFace iFace  = new JPA_DAO();)
+        {
+            Car a = new Car();
+            a.setLicense("ABC-510");
+            a.setType(Car.Type.CAR);
+            iFace.saveCar(a);
+
+            ParkingSpace ps = new ParkingSpace();
+            ps.setStatus(ParkingSpace.Status.USE);
+            ps.setDate(LocalDateTime.now());
+            ps.setType(ParkingSpace.Type.CAR);
+            iFace.saveParkingSpace(ps);
+            System.out.println("Done:D");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         progressBar.setProgress(0);
         Loading();
     }

@@ -2,7 +2,7 @@ package hu.inf.unideb;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="ParkingSpace")
@@ -17,7 +17,7 @@ public class ParkingSpace implements Serializable{
     private Status status;
     @Enumerated(EnumType.STRING)
     private Type type;
-    private java.time.LocalDate date;
+    private LocalDateTime date;
 
     public enum Status{
         FREE,USE,RENT
@@ -58,11 +58,11 @@ public class ParkingSpace implements Serializable{
         this.type = type;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

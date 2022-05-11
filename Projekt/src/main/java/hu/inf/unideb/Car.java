@@ -10,9 +10,13 @@ public class Car implements Serializable{
     private int id;
     @Id
     private String license;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
     private int money;
 
+    public enum Type{
+        CAR,BUS,DISABLED
+    }
 
     public int getId() {
         return id;
@@ -30,11 +34,11 @@ public class Car implements Serializable{
         this.license = license;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
