@@ -5,7 +5,7 @@ import java.util.List;
 
 public class JPA_DAO implements JPA_IFace{
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Projekt");
-    //private final EntityManager EntityManager = entityManagerFactory.createEntityManager();
+    //private final EntityManager em = entityManagerFactory.createEntityManager();
 
     @Override
     public void saveCar(Car a) {
@@ -91,6 +91,22 @@ public class JPA_DAO implements JPA_IFace{
         finally {
             em.close();
         }
+    }
+
+    public Car findCarLicense(String license)
+    {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            return em.find(Car.class, license);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            em.close();
+        }
+        return null;
     }
 
     /*@Override

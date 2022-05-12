@@ -10,7 +10,7 @@ public class ParkingSpace implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne
+    @OneToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "Car_License", referencedColumnName = "license")
     private Car car;
     @Enumerated(EnumType.STRING)
@@ -64,5 +64,16 @@ public class ParkingSpace implements Serializable{
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingSpace{" +
+                "id=" + id +
+                ", car=" + car +
+                ", status=" + status +
+                ", type=" + type +
+                ", date=" + date +
+                '}';
     }
 }

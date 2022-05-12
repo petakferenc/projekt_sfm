@@ -49,4 +49,14 @@ public class Car implements Serializable{
     public void setMoney(int money) {
         this.money = money;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", license='" + license + '\'' +
+                ", type=" + type +
+                ", money=" + money +
+                '}';
+    }
 }

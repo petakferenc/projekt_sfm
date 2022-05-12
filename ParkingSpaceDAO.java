@@ -22,8 +22,8 @@ public class ParkingSpaceDAO implements AutoCloseable {
         entityManager.getTransaction().commit();
     }
 
-    public ParkingSpace getFreeParkingSpace() {
-        return entityManager.find(ParkingSpace.class, 1);
+    public ParkingSpace getFreeParkingSpace(String license) {
+        return entityManager.find(ParkingSpace.class, License);
     }
 
     public void saveParking(String license, ParkingSpace space) {
