@@ -6,9 +6,10 @@ import java.io.Serializable;
 @Entity
 @Table(name="cars")
 public class Car implements Serializable{
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Id
+    //@Id
     private String license;
     @Enumerated(EnumType.STRING)
     private Type type;

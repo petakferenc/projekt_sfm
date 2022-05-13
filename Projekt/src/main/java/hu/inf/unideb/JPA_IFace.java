@@ -8,4 +8,5 @@ public interface JPA_IFace extends AutoCloseable{
     public void deletParkingSpace(ParkingSpace a);
     public void close() throws Exception;
     public Car findCarLicense(String license);
+    public ParkingSpace findPSStatusByType(ParkingSpace.Status status, ParkingSpace.Type type);
 }

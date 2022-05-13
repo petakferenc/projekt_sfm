@@ -97,7 +97,30 @@ public class JPA_DAO implements JPA_IFace{
     {
         EntityManager em = entityManagerFactory.createEntityManager();
         try {
-            return em.find(Car.class, license);
+            //return em.find(Car.class, license);
+            TypedQuery<Car> query = em.createQuery("SELECT a FROM Car a WHERE a.license=:license", Car.class);
+            query.setParameter("license",license);
+            return query.getSingleResult();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            em.close();
+        }
+        return null;
+    }
+
+    public ParkingSpace findPSStatusByType(ParkingSpace.Status status, ParkingSpace.Type type)
+    {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            //return em.find(ParkingSpace.class,ParkingSpace.Status.FREE);
+            TypedQuery<ParkingSpace> query = em.createQuery("SELECT a FROM ParkingSpace a WHERE a.status=:status AND a.type=:type", ParkingSpace.class);
+            query.setParameter("status",status);
+            query.setParameter("type",type);
+            return query.getSingleResult();
         }
         catch (Exception e)
         {

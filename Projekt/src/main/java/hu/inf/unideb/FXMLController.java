@@ -114,13 +114,38 @@ public class FXMLController implements Initializable {
             ps.setCar(a);
             System.out.println(ps.toString());
             iFace.saveParkingSpace(ps);
-            
-            if(iFace.findCarLicense("ABC-510") == null)
+
+            Car b = new Car();
+            b.setLicense("BBB-456");
+            b.setType(Car.Type.CAR);
+            iFace.saveCar(b);
+            System.out.println(b.toString());
+
+            ParkingSpace psb = new ParkingSpace();
+            psb.setStatus(ParkingSpace.Status.RENT);
+            psb.setDate(LocalDateTime.now());
+            psb.setType(ParkingSpace.Type.CAR);
+            psb.setCar(b);
+            System.out.println(psb.toString());
+            iFace.saveParkingSpace(psb);
+
+            Car findcarbylicens = iFace.findCarLicense("ABC-510");
+            if( findcarbylicens == null)
             {
                 System.out.println("nope");
             }
             else
                 System.out.println("Yepp");
+
+            ParkingSpace status = iFace.findPSStatusByType(ParkingSpace.Status.USE, ParkingSpace.Type.CAR);
+            if( status == null)
+            {
+                System.out.println("nope");
+            }
+            else {
+                System.out.print("StatusByCarID: ");
+                System.out.println(status.getId());
+            }
 
             System.out.println("Done:D");
 
