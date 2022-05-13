@@ -161,6 +161,8 @@ public class FXMLController implements Initializable {
 
             iFace.deletCar(findcarbylicens);
 
+            System.out.println("Free: "+iFace.GetFreeSpaces());
+
             if( findcarbylicens == null)
             {
                 System.out.println("nope");

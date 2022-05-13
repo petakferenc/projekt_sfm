@@ -1,17 +1,18 @@
 package hu.inf.unideb;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="Cars")
-public class Car implements Serializable{
+@Table(name="BlackList")
+public class BlackList implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String license;
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private Car.Type type;
     private int money;
 
     public enum Type{
@@ -34,11 +35,11 @@ public class Car implements Serializable{
         this.license = license;
     }
 
-    public Type getType() {
+    public Car.Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(Car.Type type) {
         this.type = type;
     }
 

@@ -156,6 +156,26 @@ public class JPA_DAO implements JPA_IFace{
         return null;
     }
 
+    @Override
+    public long GetFreeSpaces()
+    {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            //return em.find(ParkingSpace.class,ParkingSpace.Status.FREE);
+            TypedQuery<ParkingSpace> query = em.createQuery("SELECT a FROM ParkingSpace a WHERE a.status=:status", ParkingSpace.class);
+            query.setParameter("status",ParkingSpace.Status.FREE);
+            return query.getResultStream().count();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
+        return -1;
+    }
+
     /*@Override
     public void saveParkingSpace(ParkingSpace a) {
         entityManager.getTransaction().begin();
