@@ -7,9 +7,8 @@ import java.io.Serializable;
 @Table(name="cars")
 public class Car implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //@Id
     private String license;
     @Enumerated(EnumType.STRING)
     private Type type;

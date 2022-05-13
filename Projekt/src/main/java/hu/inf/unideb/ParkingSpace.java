@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Table(name="ParkingSpace")
 public class ParkingSpace implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne//(cascade = CascadeType.ALL)
+    @OneToOne//(cascade = CascadeType.MERGE)
     @JoinColumn(name = "Car_License", referencedColumnName = "license")
     private Car car;
     @Enumerated(EnumType.STRING)
@@ -18,6 +18,15 @@ public class ParkingSpace implements Serializable{
     @Enumerated(EnumType.STRING)
     private Type type;
     private LocalDateTime date;
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public enum Status{
         FREE,USE,RENT
@@ -74,6 +83,7 @@ public class ParkingSpace implements Serializable{
                 ", status=" + status +
                 ", type=" + type +
                 ", date=" + date +
+                ", position=" + position +
                 '}';
     }
 }

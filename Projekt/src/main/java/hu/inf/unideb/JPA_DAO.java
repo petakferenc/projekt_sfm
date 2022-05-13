@@ -5,11 +5,11 @@ import java.util.List;
 
 public class JPA_DAO implements JPA_IFace{
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Projekt");
-    //private final EntityManager em = entityManagerFactory.createEntityManager();
+    private final EntityManager em = entityManagerFactory.createEntityManager();
 
     @Override
     public void saveCar(Car a) {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(a);
@@ -23,18 +23,24 @@ public class JPA_DAO implements JPA_IFace{
             }
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
-        }
+        }*/
 
     }
 
     @Override
     public void deletCar(Car a) {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.remove(a);
+            ParkingSpace ps = findPSByLicense(a.getLicense());
+            ps.setCar(null);
+            ps.setStatus(ParkingSpace.Status.FREE);
+            ps.setDate(null);
+            System.out.println(ps.toString());
+            em.persist(ps);
+            em.remove(em.contains(a) ? a : em.merge(a));
             em.getTransaction().commit();
         }
         catch (Exception e)
@@ -45,14 +51,14 @@ public class JPA_DAO implements JPA_IFace{
             }
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
-        }
+        }*/
     }
 
     @Override
     public void saveParkingSpace(ParkingSpace a) {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(a);
@@ -60,21 +66,21 @@ public class JPA_DAO implements JPA_IFace{
         }
         catch (Exception e)
         {
-            if(em.getTransaction() !=null)
+            /*if(em.getTransaction() !=null)
             {
                 em.getTransaction().rollback();
-            }
+            }*/
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
-        }
+        }*/
 
     }
 
     @Override
     public void deletParkingSpace(ParkingSpace a) {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
             em.remove(a);
@@ -88,47 +94,65 @@ public class JPA_DAO implements JPA_IFace{
             }
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
-        }
+        }*/
     }
 
-    public Car findCarLicense(String license)
+    public Car findCarByLicense(String license)
     {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             //return em.find(Car.class, license);
             TypedQuery<Car> query = em.createQuery("SELECT a FROM Car a WHERE a.license=:license", Car.class);
             query.setParameter("license",license);
-            return query.getSingleResult();
+            return query.getResultStream().findFirst().orElse(null);//getSingleResult();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
+        }*/
+        return null;
+    }
+
+    public ParkingSpace findPSByLicense(String license)
+    {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            TypedQuery<ParkingSpace> query = em.createQuery("SELECT a FROM ParkingSpace a WHERE a.car.license=:license", ParkingSpace.class);
+            query.setParameter("license",license);
+            return query.getResultStream().findFirst().orElse(null);//getSingleResult();
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
         return null;
     }
 
     public ParkingSpace findPSStatusByType(ParkingSpace.Status status, ParkingSpace.Type type)
     {
-        EntityManager em = entityManagerFactory.createEntityManager();
+        //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             //return em.find(ParkingSpace.class,ParkingSpace.Status.FREE);
             TypedQuery<ParkingSpace> query = em.createQuery("SELECT a FROM ParkingSpace a WHERE a.status=:status AND a.type=:type", ParkingSpace.class);
             query.setParameter("status",status);
             query.setParameter("type",type);
-            return query.getSingleResult();
+            return query.getResultStream().findFirst().orElse(null);// .getSingleResult().;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        finally {
+        /*finally {
             em.close();
-        }
+        }*/
         return null;
     }
 
@@ -151,6 +175,12 @@ public class JPA_DAO implements JPA_IFace{
     public void close() throws Exception {
         //entityManager.close();
         entityManagerFactory.close();
+    }
+
+    @Override
+    public void flushAndClear() {
+        em.flush();
+        em.clear();
     }
 
 }

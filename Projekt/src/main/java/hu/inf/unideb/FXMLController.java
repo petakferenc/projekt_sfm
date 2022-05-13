@@ -112,6 +112,7 @@ public class FXMLController implements Initializable {
             ps.setDate(LocalDateTime.now());
             ps.setType(ParkingSpace.Type.CAR);
             ps.setCar(a);
+            ps.setPosition(1);
             System.out.println(ps.toString());
             iFace.saveParkingSpace(ps);
 
@@ -126,10 +127,11 @@ public class FXMLController implements Initializable {
             psb.setDate(LocalDateTime.now());
             psb.setType(ParkingSpace.Type.CAR);
             psb.setCar(b);
+            psb.setPosition(2);
             System.out.println(psb.toString());
             iFace.saveParkingSpace(psb);
 
-            Car findcarbylicens = iFace.findCarLicense("ABC-510");
+            Car findcarbylicens = iFace.findCarByLicense("ABC-510");
             if( findcarbylicens == null)
             {
                 System.out.println("nope");
@@ -137,7 +139,50 @@ public class FXMLController implements Initializable {
             else
                 System.out.println("Yepp");
 
+            //iFace.deletParkingSpace(ps);
+            LocalDateTime date = iFace.findPSByLicense("ABC-510").getDate();
+            long d1 = localeDateTimeToHour(date);
+            long d2 = localeDateTimeToHour(LocalDateTime.now());
+            d2+=5;
+            System.out.println(d1);
+            System.out.println(d2);
+            long oss = d2-d1;
+            System.out.println("calc: " + oss);
+            if(oss > 1)
+            {
+                if(oss >= 2)
+                {
+                    oss = (oss-1)*500+1000;
+                }
+                else
+                    oss = 1000;
+            }
+            System.out.println("Fizet: " + oss);
+
+            iFace.deletCar(findcarbylicens);
+
+            if( findcarbylicens == null)
+            {
+                System.out.println("nope");
+            }
+            else
+                System.out.println("Yepp");
+
+            Car f = new Car();
+            f.setLicense("BFB-476");
+            f.setType(Car.Type.CAR);
+            iFace.saveCar(f);
+            System.out.println(f.toString());
+
+            ParkingSpace ss = iFace.findPSStatusByType(ParkingSpace.Status.FREE, ParkingSpace.Type.CAR);
+            ss.setDate(LocalDateTime.now());
+            ss.setStatus(ParkingSpace.Status.USE);
+            ss.setCar(f);
+            System.out.println(ss.toString());
+            iFace.saveParkingSpace(ss);
+
             ParkingSpace status = iFace.findPSStatusByType(ParkingSpace.Status.USE, ParkingSpace.Type.CAR);
+
             if( status == null)
             {
                 System.out.println("nope");
@@ -146,7 +191,7 @@ public class FXMLController implements Initializable {
                 System.out.print("StatusByCarID: ");
                 System.out.println(status.getId());
             }
-
+            iFace.close();
             System.out.println("Done:D");
 
         }catch (Exception e)
@@ -171,6 +216,17 @@ public class FXMLController implements Initializable {
     }
 
     public void blackListButton(ActionEvent actionEvent) {
+    }
+
+    public long localeDateTimeToHour(LocalDateTime date)
+    {
+        long sec = date.getYear() * 8766;
+        sec+= date.getMonthValue() * 730;
+        sec+= date.getDayOfMonth() * 24;
+        sec+= date.getHour();
+        sec+= date.getMinute() / 60;
+        sec+= date.getSecond() / 3600 ;
+        return sec;
     }
 }
 
