@@ -1,0 +1,47 @@
+.apane {
+    -fx-background-color: #faf4ff;
+
+}
+.stbar .bar{
+    -fx-background-color: linear-gradient(to left, blue, purple);
+}
+
+.button{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #121212;
+    -fx-border-width: 2;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: #555555;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button:hover {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #121212;
+    -fx-border-width: 2;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: #555585;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button:pressed {
+
+    -fx-border-color: #121212;
+    -fx-border-width: 2;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-color: #555590;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+    -fx-scale-z: 0.9;
+}
