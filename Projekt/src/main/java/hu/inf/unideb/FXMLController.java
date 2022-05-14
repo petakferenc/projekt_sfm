@@ -139,7 +139,6 @@ public class FXMLController implements Initializable {
             else
                 System.out.println("Yepp");
 
-            //iFace.deletParkingSpace(ps);
             LocalDateTime date = iFace.findPSByLicense("ABC-510").getDate();
             long d1 = localeDateTimeToHour(date);
             long d2 = localeDateTimeToHour(LocalDateTime.now());
@@ -170,18 +169,54 @@ public class FXMLController implements Initializable {
             else
                 System.out.println("Yepp");
 
-            Car f = new Car();
-            f.setLicense("BFB-476");
-            f.setType(Car.Type.CAR);
-            iFace.saveCar(f);
-            System.out.println(f.toString());
+            BlackList bl = new BlackList();
+            bl.setLicense("ABC-510");
+            iFace.saveBlackList(bl);
 
-            ParkingSpace ss = iFace.findPSStatusByType(ParkingSpace.Status.FREE, ParkingSpace.Type.CAR);
-            ss.setDate(LocalDateTime.now());
-            ss.setStatus(ParkingSpace.Status.USE);
-            ss.setCar(f);
-            System.out.println(ss.toString());
-            iFace.saveParkingSpace(ss);
+            if(iFace.findBlacListByLicense("ABC-510") == null)
+            {
+                Car f = new Car();
+                f.setLicense("ABC-510");
+                f.setType(Car.Type.CAR);
+                iFace.saveCar(f);
+                System.out.println(f.toString());
+
+                ParkingSpace ss = iFace.findPSStatusByType(ParkingSpace.Status.FREE, ParkingSpace.Type.CAR);
+                ss.setDate(LocalDateTime.now());
+                ss.setStatus(ParkingSpace.Status.USE);
+                ss.setCar(f);
+                System.out.println(ss.toString());
+                iFace.saveParkingSpace(ss);
+            }
+            else
+            {
+                System.out.println("can't go in");
+
+            }
+
+            iFace.deletBlackList(bl);
+
+            if(iFace.findBlacListByLicense("ABC-510") == null)
+            {
+                System.out.println("go in");
+                Car f = new Car();
+                f.setLicense("ABC-510");
+                f.setType(Car.Type.CAR);
+                iFace.saveCar(f);
+                System.out.println(f.toString());
+
+                ParkingSpace ss = iFace.findPSStatusByType(ParkingSpace.Status.FREE, ParkingSpace.Type.CAR);
+                ss.setDate(LocalDateTime.now());
+                ss.setStatus(ParkingSpace.Status.USE);
+                ss.setCar(f);
+                System.out.println(ss.toString());
+                iFace.saveParkingSpace(ss);
+            }
+            else
+            {
+                System.out.println("can't go in");
+
+            }
 
             ParkingSpace status = iFace.findPSStatusByType(ParkingSpace.Status.USE, ParkingSpace.Type.CAR);
 
@@ -193,6 +228,9 @@ public class FXMLController implements Initializable {
                 System.out.print("StatusByCarID: ");
                 System.out.println(status.getId());
             }
+
+            iFace.deletParkingSpace(psb);
+
             iFace.close();
             System.out.println("Done:D");
 

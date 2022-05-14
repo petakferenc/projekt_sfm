@@ -82,6 +82,52 @@ public class JPA_DAO implements JPA_IFace{
     public void deletParkingSpace(ParkingSpace a) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
+            deletCar(a.getCar());
+            em.getTransaction().begin();
+            em.remove(a);
+            em.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            if(em.getTransaction() !=null)
+            {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
+    }
+
+    @Override
+    public void saveBlackList(BlackList a) {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            if(findBlacListByLicense(a.getLicense()) != null)
+                return;
+            em.getTransaction().begin();
+            em.persist(a);
+            em.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            if(em.getTransaction() !=null)
+            {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
+
+    }
+
+    @Override
+    public void deletBlackList(BlackList a) {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
             em.getTransaction().begin();
             em.remove(a);
             em.getTransaction().commit();
@@ -123,6 +169,25 @@ public class JPA_DAO implements JPA_IFace{
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
             TypedQuery<ParkingSpace> query = em.createQuery("SELECT a FROM ParkingSpace a WHERE a.car.license=:license", ParkingSpace.class);
+            query.setParameter("license",license);
+            return query.getResultStream().findFirst().orElse(null);//getSingleResult();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
+        return null;
+    }
+
+    public BlackList findBlacListByLicense(String license)
+    {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            //return em.find(Car.class, license);
+            TypedQuery<BlackList> query = em.createQuery("SELECT a FROM BlackList a WHERE a.license=:license", BlackList.class);
             query.setParameter("license",license);
             return query.getResultStream().findFirst().orElse(null);//getSingleResult();
         }

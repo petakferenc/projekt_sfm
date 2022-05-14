@@ -9,6 +9,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>hu.inf.unideb.Car</class>
         <class>hu.inf.unideb.ParkingSpace</class>
+        <class>hu.inf.unideb.BlackList</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>

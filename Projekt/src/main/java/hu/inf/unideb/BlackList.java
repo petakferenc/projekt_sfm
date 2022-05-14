@@ -11,13 +11,6 @@ public class BlackList implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String license;
-    @Enumerated(EnumType.STRING)
-    private Car.Type type;
-    private int money;
-
-    public enum Type{
-        CAR,BUS,DISABLED
-    }
 
     public int getId() {
         return id;
@@ -35,29 +28,11 @@ public class BlackList implements Serializable{
         this.license = license;
     }
 
-    public Car.Type getType() {
-        return type;
-    }
-
-    public void setType(Car.Type type) {
-        this.type = type;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
     @Override
     public String toString() {
-        return "Car{" +
+        return "BlackList{" +
                 "id=" + id +
                 ", license='" + license + '\'' +
-                ", type=" + type +
-                ", money=" + money +
                 '}';
     }
 }
