@@ -5,16 +5,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.inf.unideb.BerletekController">
    <children>
       <Text layoutX="102.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-tól" wrappingWidth="25.814453125" />
-      <TextField layoutX="42.0" layoutY="67.0" promptText="Rendszám" />
-      <TextField layoutX="153.0" layoutY="33.0" prefHeight="25.0" prefWidth="60.0" />
-      <TextField layoutX="42.0" layoutY="33.0" prefHeight="25.0" prefWidth="60.0" />
+      <TextField fx:id="licensePlate1" layoutX="42.0" layoutY="67.0" promptText="Rendszám" />
+      <TextField fx:id="toText" layoutX="153.0" layoutY="33.0" prefHeight="25.0" prefWidth="60.0" />
+      <TextField fx:id="fromText" layoutX="42.0" layoutY="33.0" prefHeight="25.0" prefWidth="60.0" />
       <Text layoutX="213.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-ig" wrappingWidth="25.814453125" />
-      <Button layoutX="42.0" layoutY="103.0" mnemonicParsing="false" text="Bérlet hozzáadása" />
-      <TextField layoutX="40.0" layoutY="267.0" promptText="Rendszám" />
-      <Button layoutX="40.0" layoutY="302.0" mnemonicParsing="false" text="Bérlet törlése" />
+      <Button layoutX="42.0" layoutY="103.0" mnemonicParsing="false" onAction="#addPass" text="Bérlet hozzáadása" />
+      <TextField fx:id="licensePlate2" layoutX="40.0" layoutY="267.0" promptText="Rendszám" />
+      <Button layoutX="40.0" layoutY="302.0" mnemonicParsing="false" onAction="#deletePass" text="Bérlet törlése" />
    </children>
 </Pane>
