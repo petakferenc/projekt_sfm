@@ -133,14 +133,15 @@ public class FXMLController implements Initializable {
         }
 
 
-    public void blackListButton(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/feketelista.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Fekete Lista");
-        stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
-        stage.setScene(scene);
-        stage.show();
+        @FXML
+        void blackListButton(ActionEvent event) throws IOException {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/feketelista.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Fekete lista");
+            stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
+            stage.setScene(scene);
+            stage.show();
     }
 }
 

@@ -23,54 +23,19 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
-public class BerletekController implements Initializable {
+
+public class FeketelistaController implements Initializable {
 
     @FXML
-    private ProgressBar progressBar;
-    @FXML
-    private ProgressBar progressBar2;
-    @FXML
-    private Label dateIn;
-    @FXML
-    private Label dateOut;
-    @FXML
-    private Label freeSpaces;
-    @FXML
-    private Label fee;
-    @FXML
-    private TextField addPass;
-    @FXML
-    private TextField fromText;
-    @FXML
-    private TextField toText;
-    @FXML
-    private TextField licensePlate1;
-    @FXML
-    private TextField licensePlate2;
-    @FXML
-    private Circle redCircle;
-    @FXML
-    private Circle greenCircle;
-    @FXML
-    private Circle redCircle2;
-    @FXML
-    private Circle greenCircle2;
-
+    private TextField lp;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-    public void addPass(ActionEvent actionEvent){
-        String from = fromText.getText();
-        String to = toText.getText();
-        String lp = licensePlate1.getText();
-    }
-    public void deletePass(ActionEvent actionEvent){
-        String lp = licensePlate2.getText();
-    }
+
     public void listButton(ActionEvent actionEvent)throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/feketelista.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/feketelistaDisplay.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
         stage.setTitle("Fekete Lista");
@@ -78,5 +43,13 @@ public class BerletekController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public void deleteFromList(ActionEvent actionEvent)throws IOException {
+        String licensePlate = lp.getText();
+    }
+    public void addToList(ActionEvent actionEvent)throws IOException {
+        String licensePlate = lp.getText();
+    }
+
+
 }
 
