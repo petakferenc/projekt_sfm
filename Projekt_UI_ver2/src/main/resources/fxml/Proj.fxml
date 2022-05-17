@@ -80,8 +80,8 @@
                               <Image url="@green.png" />
                            </image>
                         </ImageView>
-                         <Circle fx:id="greenCircle2" fill="#948a89" layoutX="121.0" layoutY="323.0" radius="19.0" stroke="#9e6767" strokeType="INSIDE" />
                          <Circle fx:id="redCircle2" fill="#ff0900" layoutX="121.0" layoutY="285.0" radius="19.0" stroke="#9e6767" strokeType="INSIDE" />
+                         <Circle fx:id="greenCircle2" fill="#948a89" layoutX="121.0" layoutY="323.0" radius="19.0" stroke="#9e6767" strokeType="INSIDE" />
                          <Pane layoutX="86.0" layoutY="250.0" opacity="0.11" prefHeight="109.0" prefWidth="71.0" style="-fx-background-color: black; -fx-border-radius: 20px; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 20px;" />
                      </children>
                   </Pane>
