@@ -95,9 +95,8 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" stylesheets="@style.css">
                <children>
                   <Button layoutX="272.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleLogButtonPushed" styleClass="admin-button" text="Log fájl megnyitása" />
-                  <Button layoutX="276.0" layoutY="254.0" mnemonicParsing="false" onAction="#addPassButton" styleClass="admin-button" text="Bérlet hozzáadása" />
+                  <Button layoutX="276.0" layoutY="254.0" mnemonicParsing="false" onAction="#addPassButton" styleClass="admin-button" text="Bérlet módosítás" />
                   <Button layoutX="298.0" layoutY="398.0" mnemonicParsing="false" onAction="#blackListButton" styleClass="admin-button" text="Fekete lista" />
-                  <TextField fx:id="addPass" alignment="CENTER" layoutX="282.0" layoutY="215.0" promptText="bérletszám" />
                   <ImageView fitHeight="65.0" fitWidth="87.0" layoutX="329.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@logo_ver_2_mini.png" />
