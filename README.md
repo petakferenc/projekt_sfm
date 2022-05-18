@@ -1,5 +1,5 @@
 # projekt_sfm
 
-Frissített UI_ver_2.
+# Frissített UI_ver_2.
 
-Dátum hotfix
+# Dátum hotfix
