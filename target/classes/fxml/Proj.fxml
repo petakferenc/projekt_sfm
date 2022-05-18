@@ -10,7 +10,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -29,19 +28,16 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <ImageView id="red" fx:id="red" fitHeight="87.0" fitWidth="77.0" layoutX="83.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@red.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView id="green" fx:id="green" fitHeight="78.0" fitWidth="77.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="green" fx:id="green1" fitHeight="78.0" fitWidth="77.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@green.png" />
                            </image>
                         </ImageView>
-                        <Circle fx:id="greenCircle" fill="#948a89" layoutX="121.0" layoutY="343.0" radius="19.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="1.7" />
-                        <Circle fx:id="redCircle" fill="#03ff0a" layoutX="121.0" layoutY="305.0" radius="19.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="0.0" strokeWidth="1.7" />
-                        <Pane layoutX="86.0" layoutY="270.0" opacity="0.13" prefHeight="109.0" prefWidth="71.0" style="-fx-background-color: black; -fx-border-radius: 20px; -fx-border-width: 2px; -fx-border-color: black; -fx-background-radius: 20px;" />
+                        <ImageView id="green" fx:id="red1" fitHeight="80.0" fitWidth="82.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@red.png" />
+                           </image>
+                        </ImageView>
                      </children></Pane>
                         <Button layoutX="430.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleTicketButtonPushed" prefHeight="42.0" prefWidth="143.0" stylesheets="@style.css" text="Jegy igénylése" AnchorPane.topAnchor="238.0" />
                         <Button layoutX="430.0" layoutY="333.0" mnemonicParsing="false" onAction="#handlePassButtonPushed" prefHeight="42.0" prefWidth="143.0" stylesheets="@style.css" text="Bérlet" />
@@ -70,24 +66,21 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <ImageView id="red" fx:id="red1" fitHeight="87.0" fitWidth="77.0" layoutX="83.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@red.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView id="green" fx:id="green1" fitHeight="78.0" fitWidth="77.0" layoutX="84.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@green.png" />
-                           </image>
-                        </ImageView>
-                         <Circle fx:id="redCircle2" fill="#ff0900" layoutX="121.0" layoutY="285.0" radius="19.0" stroke="#9e6767" strokeType="INSIDE" />
-                         <Circle fx:id="greenCircle2" fill="#948a89" layoutX="121.0" layoutY="323.0" radius="19.0" stroke="#9e6767" strokeType="INSIDE" />
-                         <Pane layoutX="86.0" layoutY="250.0" opacity="0.11" prefHeight="109.0" prefWidth="71.0" style="-fx-background-color: black; -fx-border-radius: 20px; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 20px;" />
+                         <ImageView id="green" fx:id="green2" fitHeight="78.0" fitWidth="77.0" layoutX="84.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@green.png" />
+                             </image>
+                         </ImageView>
+                         <ImageView id="green" fx:id="red2" fitHeight="80.0" fitWidth="82.0" layoutX="84.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@red.png" />
+                             </image>
+                         </ImageView>
                      </children>
                   </Pane>
                   <TextField fx:id="licensePlate2" layoutX="364.0" layoutY="119.0" prefHeight="42.0" prefWidth="270.0" promptText="Rendszám: &quot;ABC-123&quot;" style="-fx-background-color: white; -fx-alignment: center;" />
                   <Button layoutX="467.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleOkButtonPushed" text="OK" />
-                   <ProgressBar fx:id="progressBar2" layoutX="399.0" layoutY="440.0" opacity="0.69" prefHeight="20.0" prefWidth="200.0" progress="0.69" styleClass="stbar" stylesheets="@style.css" />
+                   <ProgressBar fx:id="progressBar2" layoutX="402.0" layoutY="437.0" opacity="0.69" prefHeight="12.0" prefWidth="200.0" progress="0.0" styleClass="stbar" stylesheets="@style.css" />
                    <Label fx:id="fee" layoutX="364.0" layoutY="294.0" prefHeight="42.0" prefWidth="270.0" style="-fx-background-color: white; -fx-alignment: center;" text="Fizetendő: 1540 Ft" />
                   <ImageView fitHeight="69.0" fitWidth="60.0" layoutX="472.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,9 +95,8 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" stylesheets="@style.css">
                <children>
                   <Button layoutX="272.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleLogButtonPushed" styleClass="admin-button" text="Log fájl megnyitása" />
-                  <Button layoutX="276.0" layoutY="254.0" mnemonicParsing="false" onAction="#addPassButton" styleClass="admin-button" text="Bérlet hozzáadása" />
+                  <Button layoutX="276.0" layoutY="254.0" mnemonicParsing="false" onAction="#addPassButton" styleClass="admin-button" text="Bérlet módosítás" />
                   <Button layoutX="298.0" layoutY="398.0" mnemonicParsing="false" onAction="#blackListButton" styleClass="admin-button" text="Fekete lista" />
-                  <TextField fx:id="addPass" alignment="CENTER" layoutX="282.0" layoutY="215.0" promptText="bérletszám" />
                   <ImageView fitHeight="65.0" fitWidth="87.0" layoutX="329.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@logo_ver_2_mini.png" />
