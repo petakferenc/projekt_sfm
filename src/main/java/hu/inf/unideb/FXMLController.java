@@ -1,5 +1,6 @@
 package hu.inf.unideb;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -31,6 +33,8 @@ public class FXMLController implements Initializable {
     private ProgressBar progressBar2;
     @FXML
     private Label dateIn;
+    @FXML
+    private Label dateOut;
     @FXML
     private Label freeSpaces;
     @FXML
@@ -49,6 +53,15 @@ public class FXMLController implements Initializable {
     private Circle redCircle2;
     @FXML
     private Circle greenCircle2;
+    @FXML
+    private ImageView red1;
+    @FXML
+    private ImageView green1;
+    @FXML
+    private ImageView red2;
+    @FXML
+    private ImageView green2;
+
 
 
     private void Timenow(){
@@ -63,13 +76,14 @@ public class FXMLController implements Initializable {
                 final String timenow = df.format(new Date());
                 Platform.runLater(() -> {
                     dateIn.setText(timenow); // This is the label
+                    dateOut.setText(timenow);
                 });
             }
         });
         thread.start();
     }
 
-    private void Loading(){
+    private void Loading(ProgressBar progressBar, ImageView red1, ImageView green1){
         Thread thread = new Thread(() -> {
 
             while (progressBar.getProgress() < 1) {
@@ -81,11 +95,15 @@ public class FXMLController implements Initializable {
                 }
             }
             if (((int)progressBar.getProgress()) == 1) {
-                trafficLight.setGreen(redCircle, greenCircle);
+                //trafficLight.setGreen(redCircle, greenCircle);
+                red1.setVisible(false);
+                green1.setVisible(true);
+
             }
             try {
                 Thread.sleep(5000);
-                trafficLight.setRed(redCircle, greenCircle);
+                green1.setVisible(false);
+                red1.setVisible(true);
                 progressBar.setProgress(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -96,8 +114,12 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        redCircle.setFill(Color.valueOf("#ff1c02"));  //piros: #ff1c02 szurke: #948a89 zold: #03ff0a
-        greenCircle.setFill(Color.valueOf("#948a89"));
+        //redCircle.setFill(Color.valueOf("#ff1c02"));  //piros: #ff1c02 szurke: #948a89 zold: #03ff0a
+        //greenCircle.setFill(Color.valueOf("#948a89"));
+        green1.setVisible(false);
+        red1.setVisible(true);
+        green2.setVisible(false);
+        red2.setVisible(true);
         Timenow();
     }
 
@@ -246,14 +268,15 @@ public class FXMLController implements Initializable {
         });
         thread.start();
         progressBar.setProgress(0);
-        Loading();
+        Loading(progressBar, red1, green1);
     }
     public void handlePassButtonPushed(ActionEvent actionEvent) {
         progressBar.setProgress(0);
-        Loading();
+        Loading(progressBar, red1, green1);
     }
 
     public void handleOkButtonPushed(ActionEvent actionEvent) {
+        Loading(progressBar2, red2, green2);
     }
 
     public void handleLogButtonPushed(ActionEvent actionEvent) throws IOException {
