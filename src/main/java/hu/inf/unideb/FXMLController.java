@@ -98,7 +98,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
-
+        Thread thread = new Thread(() -> {
         try(JPA_IFace iFace  = new JPA_DAO();)
         {
             Car a = new Car();
@@ -238,6 +238,8 @@ public class FXMLController implements Initializable {
         {
             e.printStackTrace();
         }
+        });
+        thread.start();
         progressBar.setProgress(0);
         Loading();
     }
