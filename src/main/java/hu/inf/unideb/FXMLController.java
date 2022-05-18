@@ -1,5 +1,7 @@
 package hu.inf.unideb;
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,13 +11,18 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 
 public class FXMLController implements Initializable {
@@ -26,6 +33,8 @@ public class FXMLController implements Initializable {
     private ProgressBar progressBar2;
     @FXML
     private Label dateIn;
+    @FXML
+    private Label dateOut;
     @FXML
     private Label freeSpaces;
     @FXML
@@ -44,11 +53,20 @@ public class FXMLController implements Initializable {
     private Circle redCircle2;
     @FXML
     private Circle greenCircle2;
+    @FXML
+    private ImageView red1;
+    @FXML
+    private ImageView green1;
+    @FXML
+    private ImageView red2;
+    @FXML
+    private ImageView green2;
+
 
 
     private void Timenow(){
         Thread thread = new Thread(() -> {
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy \n HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy/MM/dd \n HH:mm:ss");
             while(true){
                 try{
                     Thread.sleep(1000);
@@ -58,13 +76,14 @@ public class FXMLController implements Initializable {
                 final String timenow = df.format(new Date());
                 Platform.runLater(() -> {
                     dateIn.setText(timenow); // This is the label
+                    dateOut.setText(timenow);
                 });
             }
         });
         thread.start();
     }
 
-    private void Loading(){
+    private void Loading(ProgressBar progressBar, ImageView red1, ImageView green1){
         Thread thread = new Thread(() -> {
 
             while (progressBar.getProgress() < 1) {
@@ -76,11 +95,15 @@ public class FXMLController implements Initializable {
                 }
             }
             if (((int)progressBar.getProgress()) == 1) {
-                trafficLight.setGreen(redCircle, greenCircle);
+                //trafficLight.setGreen(redCircle, greenCircle);
+                red1.setVisible(false);
+                green1.setVisible(true);
+
             }
             try {
                 Thread.sleep(5000);
-                trafficLight.setRed(redCircle, greenCircle);
+                green1.setVisible(false);
+                red1.setVisible(true);
                 progressBar.setProgress(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -91,14 +114,18 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        redCircle.setFill(Color.valueOf("#ff1c02"));  //piros: #ff1c02 szurke: #948a89 zold: #03ff0a
-        greenCircle.setFill(Color.valueOf("#948a89"));
+        //redCircle.setFill(Color.valueOf("#ff1c02"));  //piros: #ff1c02 szurke: #948a89 zold: #03ff0a
+        //greenCircle.setFill(Color.valueOf("#948a89"));
+        green1.setVisible(false);
+        red1.setVisible(true);
+        green2.setVisible(false);
+        red2.setVisible(true);
         Timenow();
     }
 
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
-
+        Thread thread = new Thread(() -> {
         try(JPA_IFace iFace  = new JPA_DAO();)
         {
             Car a = new Car();
@@ -238,26 +265,53 @@ public class FXMLController implements Initializable {
         {
             e.printStackTrace();
         }
+        });
+        thread.start();
         progressBar.setProgress(0);
-        Loading();
+        Loading(progressBar, red1, green1);
     }
     public void handlePassButtonPushed(ActionEvent actionEvent) {
         progressBar.setProgress(0);
-        Loading();
+        Loading(progressBar, red1, green1);
     }
 
     public void handleOkButtonPushed(ActionEvent actionEvent) {
+        Loading(progressBar2, red2, green2);
     }
 
-    public void handleLogButtonPushed(ActionEvent actionEvent) {
+    public void handleLogButtonPushed(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/logDisplay.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Log");
+        stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void addPassButton(ActionEvent actionEvent) {
+
+    @FXML
+    void addPassButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/berletek.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Bérletek");
+        stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void blackListButton(ActionEvent actionEvent) {
-    }
 
+    @FXML
+    void blackListButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/feketelista.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Fekete lista");
+        stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
+        stage.setScene(scene);
+        stage.show();
+    }
     public long localeDateTimeToHour(LocalDateTime date)
     {
         long sec = date.getYear() * 8766;
