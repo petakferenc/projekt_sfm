@@ -14,6 +14,16 @@ public class Car implements Serializable{
     private Type type;
     private int money;
 
+    public Car(int id, String license, Type type, int money) {
+        this.id = id;
+        this.license = license;
+        this.type = type;
+        this.money = money;
+    }
+
+    public Car() {
+    }
+
     public enum Type{
         CAR,BUS,DISABLED
     }
