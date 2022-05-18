@@ -6,7 +6,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.inf.unideb.FeketelistaController">
    <children>
-      <TextField fx:id="licensePlate1" layoutX="62.0" layoutY="21.0" promptText="Rendszám" />
+      <TextField fx:id="lp" layoutX="62.0" layoutY="21.0" promptText="Rendszám" />
       <Button layoutX="38.0" layoutY="52.0" mnemonicParsing="false" onAction="#addToList" text="Listához ad" />
       <Button layoutX="170.0" layoutY="52.0" mnemonicParsing="false" onAction="#deleteFromList" text="Eltávolít" />
       <Button layoutX="38.0" layoutY="329.0" mnemonicParsing="false" onAction="#listButton" text="Jelenlegi lista" />

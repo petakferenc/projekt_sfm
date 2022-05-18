@@ -118,8 +118,16 @@ public class FXMLController implements Initializable {
     public void handleOkButtonPushed(ActionEvent actionEvent) {
     }
 
-    public void handleLogButtonPushed(ActionEvent actionEvent) {
-    }
+    public void handleLogButtonPushed(ActionEvent actionEvent) throws IOException {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/logDisplay.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Log");
+            stage.getIcons().add(new Image("/fxml/logo_ver_2_mini.png"));
+            stage.setScene(scene);
+            stage.show();
+        }
+
 
         @FXML
         void addPassButton(ActionEvent event) throws IOException {
