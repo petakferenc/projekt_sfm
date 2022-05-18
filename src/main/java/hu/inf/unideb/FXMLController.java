@@ -66,7 +66,7 @@ public class FXMLController implements Initializable {
 
     private void Timenow(){
         Thread thread = new Thread(() -> {
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy \n HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy/MM/dd \n HH:mm:ss");
             while(true){
                 try{
                     Thread.sleep(1000);
