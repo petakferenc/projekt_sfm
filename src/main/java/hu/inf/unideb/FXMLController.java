@@ -430,7 +430,7 @@ public class FXMLController implements Initializable {
                                 oss = 1000;
                         }
 
-                        fee.setText("Fizetendő: " + oss);
+                        fee.setText("Fizetendő: " + oss + "Ft");
 
                     }
                     iFace.deleteCar(car);
