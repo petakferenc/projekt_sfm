@@ -57,14 +57,14 @@ public class BerletekController implements Initializable {
             SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy.MM.dd");
             Date date1 = formatter1.parse(from);
             Date date2 = formatter1.parse(to);
-            if (date1.after(date2) || date1.before(new Date())) {
+            if (date1.after(date2)) {
                 errorMessage("Hibás dátumok");
                 return;
             }
 
-            long diff = date2.getDay() - date1.getDay();
+            long diff = (date2.getDay() - date1.getDay())*-1;
             System.out.println(diff);
-            if (diff < 5) {
+            if (diff > 5) {
                 errorMessage("Enyire rövid időre nem váltható bérlet, min 5 nap");
             }
             diff = diff * 500;
