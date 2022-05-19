@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class MainApp extends Application {
 

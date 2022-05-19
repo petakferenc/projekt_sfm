@@ -1,5 +1,7 @@
 package hu.inf.unideb;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -23,7 +25,21 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
-public class FXMLController implements Initializable {
+public class FXMLController implements Initializable{
+
+
+        private void log(String lp)
+        {
+            FileWriter myWriter = null;
+            try {
+                myWriter = new FileWriter("log.txt", true);
+                myWriter.write(lp + "\n");
+                myWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     @FXML
     private ProgressBar progressBar;
@@ -62,12 +78,15 @@ public class FXMLController implements Initializable {
     @FXML
     private ImageView green;
 
-    private static JPA_IFace iFace = new JPA_DAO();
+    private static JPA_IFace iFace  = new JPA_DAO();
 
     public static JPA_IFace getiFace() {
         return iFace;
     }
-
+    private String logTime(){
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return df.format(new Date());
+    }
     private void Timenow(){
         Thread thread = new Thread(() -> {
             DateFormat df = new SimpleDateFormat("yyyy/MM/dd \n HH:mm:ss");
@@ -124,6 +143,12 @@ public class FXMLController implements Initializable {
         red1.setVisible(true);
         green1.setVisible(false);
         red1.setVisible(true);
+        File myFile = new File("log.txt");
+        try {
+            myFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Timenow();
 
         System.out.println("init run");
@@ -276,16 +301,16 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
-        progressBar.setProgress(0);
-        Loading(progressBar, red, green);
+
         //Thread thread = new Thread(() -> {
             try
             {
                 String license = licensePlate.getText();
+                log(logTime() + " "+ license + " rendszámú autó be akar menni ");
                 //System.out.println("Licens: "+license);
                 if(!license.matches("[A-Z]{3}-[0-9]{3}"))
                 {
-                    errorMessage("Nem megfelelő formályú rendszám");
+                    errorMessage("Nem megfelelő formátumú rendszám");
                     return;
                 }
 
@@ -324,7 +349,8 @@ public class FXMLController implements Initializable {
                     errorMessage("Nincs szabad hely");
                     return;
                 }
-
+                progressBar.setProgress(0);
+                Loading(progressBar, red, green);
                 ps.setStatus(ParkingSpace.Status.USE);
                 ps.setDate(LocalDateTime.now());
                 ps.setCar(a);
@@ -334,6 +360,7 @@ public class FXMLController implements Initializable {
 
                 freeSpacesIN.setText(String.valueOf(iFace.GetFreeSpaces()));
                 freeSpacesOUT.setText(String.valueOf(iFace.GetFreeSpaces()));
+                log(logTime() + " "+ license + " bement");
 
             }catch (Exception e)
             {
@@ -345,14 +372,13 @@ public class FXMLController implements Initializable {
 
     }
     public void handlePassButtonPushed(ActionEvent actionEvent) {
-        progressBar.setProgress(0);
-        Loading(progressBar, red, green);
+
         try {
             String license = licensePlate.getText();
             //System.out.println("Licens: "+license);
             if(!license.matches("[A-Z]{3}-[0-9]{3}"))
             {
-                errorMessage("Nem megfelelő formályú rendszám");
+                errorMessage("Nem megfelelő formátumú rendszám");
                 return;
             }
 
@@ -375,6 +401,8 @@ public class FXMLController implements Initializable {
                     ps.setStatus(ParkingSpace.Status.RENTIN);
                     ps.setDate(LocalDateTime.now());
                     iFace.saveParkingSpace(ps);
+                    progressBar.setProgress(0);
+                    Loading(progressBar, red, green);
                     return;
                 }
                 else
@@ -391,8 +419,7 @@ public class FXMLController implements Initializable {
     }
 
     public void handleOkButtonPushed(ActionEvent actionEvent) {
-        progressBar2.setProgress(0);
-        Loading(progressBar2, red1, green1);
+
         try {
             String license = licensePlate2.getText();
             if (!license.matches("[A-Z]{3}-[0-9]{3}")) {
@@ -425,11 +452,14 @@ public class FXMLController implements Initializable {
 
                     }
                     iFace.deleteCar(car);
+                    log(logTime() + " "+ license + " kiment");
                 }
             }
 
             freeSpacesIN.setText(String.valueOf(iFace.GetFreeSpaces()));
             freeSpacesOUT.setText(String.valueOf(iFace.GetFreeSpaces()));
+            progressBar2.setProgress(0);
+            Loading(progressBar2, red1, green1);
 
         }catch (Exception e)
         {

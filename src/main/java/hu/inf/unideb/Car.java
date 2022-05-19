@@ -12,7 +12,7 @@ public class Car implements Serializable{
     private String license;
     @Enumerated(EnumType.STRING)
     private Type type;
-    private long money;
+    private int money;
 
     public Car(int id, String license, Type type, int money) {
         this.id = id;
@@ -52,11 +52,11 @@ public class Car implements Serializable{
         this.type = type;
     }
 
-    public long getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(long money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
