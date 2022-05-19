@@ -34,7 +34,9 @@ public class FXMLController implements Initializable {
     @FXML
     private Label dateOut;
     @FXML
-    private Label freeSpaces;
+    private Label freeSpacesOUT;
+    @FXML
+    private Label freeSpacesIN;
     @FXML
     private Label fee;
     @FXML
@@ -56,9 +58,9 @@ public class FXMLController implements Initializable {
     @FXML
     private ImageView green1;
     @FXML
-    private ImageView red2;
+    private ImageView red;
     @FXML
-    private ImageView green2;
+    private ImageView green;
 
     private static JPA_IFace iFace  = new JPA_DAO();
 
@@ -114,14 +116,14 @@ public class FXMLController implements Initializable {
         thread.start();
     }
 
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
         //redCircle.setFill(Color.valueOf("#ff1c02"));  //piros: #ff1c02 szurke: #948a89 zold: #03ff0a
         //greenCircle.setFill(Color.valueOf("#948a89"));
+        green.setVisible(false);
+        red1.setVisible(true);
         green1.setVisible(false);
         red1.setVisible(true);
-        green2.setVisible(false);
-        red2.setVisible(true);
         Timenow();
 
         System.out.println("init run");
@@ -260,7 +262,8 @@ public class FXMLController implements Initializable {
             iFace.saveParkingSpace(pff);
             System.out.println("CAR 10 AND PS 10");
 
-            freeSpaces.setText(String.valueOf(iFace.GetFreeSpaces()));
+            freeSpacesIN.setText(String.valueOf(iFace.GetFreeSpaces()));
+            freeSpacesOUT.setText(String.valueOf(iFace.GetFreeSpaces()));
 
 
         } catch (Exception e) {
@@ -274,7 +277,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void handleTicketButtonPushed(ActionEvent actionEvent){
         progressBar.setProgress(0);
-        Loading(progressBar, red1, green1);
+        Loading(progressBar, red, green);
         //Thread thread = new Thread(() -> {
             try
             {
@@ -329,7 +332,8 @@ public class FXMLController implements Initializable {
                 iFace.saveCar(a);
                 iFace.saveParkingSpace(ps);
 
-                freeSpaces.setText(String.valueOf(iFace.GetFreeSpaces()));
+                freeSpacesIN.setText(String.valueOf(iFace.GetFreeSpaces()));
+                freeSpacesOUT.setText(String.valueOf(iFace.GetFreeSpaces()));
 
             }catch (Exception e)
             {
@@ -342,7 +346,7 @@ public class FXMLController implements Initializable {
     }
     public void handlePassButtonPushed(ActionEvent actionEvent) {
         progressBar.setProgress(0);
-        Loading(progressBar, red1, green1);
+        Loading(progressBar, red, green);
         try {
             String license = licensePlate.getText();
             //System.out.println("Licens: "+license);
@@ -388,7 +392,7 @@ public class FXMLController implements Initializable {
 
     public void handleOkButtonPushed(ActionEvent actionEvent) {
         progressBar2.setProgress(0);
-        Loading(progressBar2, red2, green2);
+        Loading(progressBar2, red1, green1);
         try {
             String license = licensePlate2.getText();
             if (!license.matches("[A-Z]{3}-[0-9]{3}")) {
@@ -424,7 +428,8 @@ public class FXMLController implements Initializable {
                 }
             }
 
-            freeSpaces.setText(String.valueOf(iFace.GetFreeSpaces()));
+            freeSpacesIN.setText(String.valueOf(iFace.GetFreeSpaces()));
+            freeSpacesOUT.setText(String.valueOf(iFace.GetFreeSpaces()));
 
         }catch (Exception e)
         {

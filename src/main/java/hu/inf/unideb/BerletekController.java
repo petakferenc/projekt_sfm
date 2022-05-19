@@ -38,7 +38,7 @@ public class BerletekController implements Initializable {
 
     private JPA_IFace iFace = FXMLController.getiFace();
 
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
 
     }
