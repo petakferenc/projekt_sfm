@@ -62,14 +62,14 @@ public class BerletekController implements Initializable {
                 return;
             }
 
-            long diff = date2.getTime() - date1.getTime();
+            long diff = date2.getDay() - date1.getDay();
             System.out.println(diff);
             if (diff < 5) {
                 errorMessage("Enyire rövid időre nem váltható bérlet, min 5 nap");
             }
             diff = diff * 500;
 
-            errorMessage("Fizetendő: "+diff);
+            errorMessage("Fizetendő: "+diff+"Ft");
 
             if (iFace.findBlacListByLicense(lp) != null) {
                 errorMessage("Fekete listás jármű");

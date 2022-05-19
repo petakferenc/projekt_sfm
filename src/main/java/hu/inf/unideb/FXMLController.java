@@ -303,19 +303,7 @@ public class FXMLController implements Initializable {
                 ParkingSpace ps = iFace.findPSByLicense(license);//iFace.findPSStatusByType(ParkingSpace.Status.USE, ParkingSpace.Type.CAR);
                 if(ps != null)
                 {
-                    /*if(ps.getStatus() == ParkingSpace.Status.RENTIN)
-                    {
-                        errorMessage("Már bent van a bérelt helyén a jármű");
-                        return;
-                    }
-                    else if(ps.getStatus() == ParkingSpace.Status.RENTOUT)
-                    {
-                        ps.setStatus(ParkingSpace.Status.RENTIN);
-                        ps.setDate(LocalDateTime.now());
-                        iFace.saveParkingSpace(ps);
-                        return;
-                    }
-                    else*/ if(ps.getStatus() == ParkingSpace.Status.USE)
+                    if(ps.getStatus() == ParkingSpace.Status.USE)
                     {
                         errorMessage("Már van bent ilyen jármű");
                         return;
