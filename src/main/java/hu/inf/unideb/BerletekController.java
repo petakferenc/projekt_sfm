@@ -63,6 +63,7 @@ public class BerletekController implements Initializable {
             }
 
             long diff = date2.getTime() - date1.getTime();
+            System.out.println(diff);
             if (diff < 5) {
                 errorMessage("Enyire rövid időre nem váltható bérlet, min 5 nap");
             }

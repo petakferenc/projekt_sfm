@@ -328,7 +328,6 @@ public class FXMLController implements Initializable {
                 }
 
                 ps = iFace.findPSStatusByType(ParkingSpace.Status.FREE, ParkingSpace.Type.CAR);
-                System.out.println(ps);
                 if(ps == null)
                 {
                     errorMessage("Nincs szabad hely");
