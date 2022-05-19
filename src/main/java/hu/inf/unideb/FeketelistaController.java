@@ -49,10 +49,10 @@ public class FeketelistaController implements Initializable {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.showAndWait();
         }
-        if(iFace.findBlacListByLicense(licensePlate) != null) {
-            BlackList bl = new BlackList();
-            bl.setLicense(licensePlate);
-            iFace.saveBlackList(bl);
+
+        BlackList bl = iFace.findBlacListByLicense(licensePlate);
+        if( bl != null) {
+             iFace.deletBlackList(bl);
         }
         //else System.out.println(licensePlate);
     }
@@ -63,7 +63,7 @@ public class FeketelistaController implements Initializable {
                 errorAlert.showAndWait();
             }
 
-        if(iFace.findBlacListByLicense(licensePlate) != null) {
+        if(iFace.findBlacListByLicense(licensePlate) == null) {
             BlackList bl = new BlackList();
             bl.setLicense(licensePlate);
             iFace.saveBlackList(bl);
