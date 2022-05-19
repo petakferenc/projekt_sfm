@@ -51,7 +51,6 @@ public class JPA_DAO implements JPA_IFace {
                 em.persist(ps);
                 em.remove(em.contains(a) ? a : em.merge(a));
             }
-            //System.out.println(ps.toString());
 
             em.getTransaction().commit();
         } catch (Exception e) {

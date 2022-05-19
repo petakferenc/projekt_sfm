@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +37,8 @@ public class BerletekController implements Initializable {
     private TextField licensePlate1;
     @FXML
     private TextField licensePlate2;
+    @FXML
+    private Label bFee;
 
     private JPA_IFace iFace = FXMLController.getiFace();
 
@@ -61,15 +65,15 @@ public class BerletekController implements Initializable {
                 errorMessage("Hibás dátumok");
                 return;
             }
-
-            long diff = (date2.getDay() - date1.getDay())*-1;
-            System.out.println(diff);
-            if (diff > 5) {
+            long diff = TimeUnit.DAYS.convert(Math.abs(date2.getTime()-date1.getTime()),TimeUnit.MILLISECONDS);
+            //System.out.println(diff);
+            if (diff < 5) {
                 errorMessage("Enyire rövid időre nem váltható bérlet, min 5 nap");
+                return;
             }
             diff = diff * 500;
 
-            errorMessage("Fizetendő: "+diff+"Ft");
+            bFee.setText("Fizetendő: "+diff+"Ft");
 
             if (iFace.findBlacListByLicense(lp) != null) {
                 errorMessage("Fekete listás jármű");
@@ -88,6 +92,7 @@ public class BerletekController implements Initializable {
                 a = new Car();
                 a.setLicense(lp);
                 a.setType(Car.Type.CAR);
+                a.setMoney(diff);
                 iFace.saveCar(a);
             }
 

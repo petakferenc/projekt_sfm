@@ -62,7 +62,7 @@ public class FXMLController implements Initializable {
     @FXML
     private ImageView green;
 
-    private static JPA_IFace iFace  = new JPA_DAO();
+    private static JPA_IFace iFace = new JPA_DAO();
 
     public static JPA_IFace getiFace() {
         return iFace;
