@@ -29,7 +29,7 @@ public class ParkingSpace implements Serializable{
     }
 
     public enum Status{
-        FREE,USE,RENT
+        FREE,USE,RENTIN, RENTOUT
     }
     public enum Type{
         CAR,BUS,DISABLED

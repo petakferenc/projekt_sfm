@@ -33,14 +33,26 @@ public class JPA_DAO implements JPA_IFace {
     public void deleteCar(Car a) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
-            em.getTransaction().begin();
+
             ParkingSpace ps = findPSByLicense(a.getLicense());
-            ps.setCar(null);
-            ps.setStatus(ParkingSpace.Status.FREE);
-            ps.setDate(null);
-            System.out.println(ps.toString());
-            em.persist(ps);
-            em.remove(em.contains(a) ? a : em.merge(a));
+            if(ps.getStatus() == ParkingSpace.Status.RENTOUT)
+                return;
+            em.getTransaction().begin();
+            if(ps.getStatus() == ParkingSpace.Status.RENTIN)
+            {
+                ps.setStatus(ParkingSpace.Status.RENTOUT);
+                em.persist(ps);
+            }
+            else
+            {
+                ps.setStatus(ParkingSpace.Status.FREE);
+                ps.setCar(null);
+                ps.setDate(null);
+                em.persist(ps);
+                em.remove(em.contains(a) ? a : em.merge(a));
+            }
+            //System.out.println(ps.toString());
+
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction() != null) {
@@ -76,7 +88,7 @@ public class JPA_DAO implements JPA_IFace {
     public void deletParkingSpace(ParkingSpace a) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
-            deleteCar(a.getCar());
+            //deleteCar(a.getCar());
             em.getTransaction().begin();
             em.remove(a);
             em.getTransaction().commit();
@@ -228,7 +240,7 @@ public class JPA_DAO implements JPA_IFace {
 
     @Override
     public void close() throws Exception {
-        //entityManager.close();
+        //em.close();
         entityManagerFactory.close();
     }
 

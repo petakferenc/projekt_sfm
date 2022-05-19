@@ -26,6 +26,8 @@ public class FeketelistaController implements Initializable {
     @FXML
     private TextField lp;
 
+    private JPA_IFace iFace = FXMLController.getiFace();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -47,7 +49,12 @@ public class FeketelistaController implements Initializable {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.showAndWait();
         }
-        else System.out.println(licensePlate);
+        if(iFace.findBlacListByLicense(licensePlate) != null) {
+            BlackList bl = new BlackList();
+            bl.setLicense(licensePlate);
+            iFace.saveBlackList(bl);
+        }
+        //else System.out.println(licensePlate);
     }
     public void addToList(ActionEvent actionEvent)throws IOException {
             String licensePlate = lp.getText();
@@ -55,7 +62,14 @@ public class FeketelistaController implements Initializable {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.showAndWait();
             }
-           else System.out.println(licensePlate);
+
+        if(iFace.findBlacListByLicense(licensePlate) != null) {
+            BlackList bl = new BlackList();
+            bl.setLicense(licensePlate);
+            iFace.saveBlackList(bl);
+        }
+
+           //else System.out.println(licensePlate);
 
     }
 
