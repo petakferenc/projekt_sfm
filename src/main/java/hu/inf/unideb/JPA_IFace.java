@@ -1,5 +1,7 @@
 package hu.inf.unideb;
 
+import java.util.List;
+
 public interface JPA_IFace extends AutoCloseable{
 
     public void saveCar(Car a);
@@ -15,4 +17,5 @@ public interface JPA_IFace extends AutoCloseable{
     public long GetFreeSpaces();
     public void saveBlackList(BlackList a);
     public void deletBlackList(BlackList a);
+    public List<BlackList> printBlacList();
 }

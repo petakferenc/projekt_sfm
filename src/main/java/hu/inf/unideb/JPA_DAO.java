@@ -1,6 +1,7 @@
 package hu.inf.unideb;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JPA_DAO implements JPA_IFace {
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Projekt");
@@ -142,6 +143,7 @@ public class JPA_DAO implements JPA_IFace {
         }*/
     }
 
+    @Override
     public Car findCarByLicense(String license) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
@@ -158,6 +160,7 @@ public class JPA_DAO implements JPA_IFace {
         return null;
     }
 
+    @Override
     public ParkingSpace findPSByLicense(String license) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
@@ -173,6 +176,7 @@ public class JPA_DAO implements JPA_IFace {
         return null;
     }
 
+    @Override
     public BlackList findBlacListByLicense(String license) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
@@ -189,6 +193,23 @@ public class JPA_DAO implements JPA_IFace {
         return null;
     }
 
+    @Override
+    public List<BlackList> printBlacList() {
+        //EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            //return em.find(Car.class, license);
+            TypedQuery<BlackList> query = em.createQuery("SELECT a FROM BlackList a ORDER BY id DESC", BlackList.class);
+            return query.getResultList();//getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*finally {
+            em.close();
+        }*/
+        return null;
+    }
+
+    @Override
     public ParkingSpace findPSStatusByType(ParkingSpace.Status status, ParkingSpace.Type type) {
         //EntityManager em = entityManagerFactory.createEntityManager();
         try {
