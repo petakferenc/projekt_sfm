@@ -19,7 +19,7 @@ public class blDisplayController implements Initializable {
 
     private JPA_IFace iFace = FXMLController.getiFace();
 
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
 
         blackListView.setItems(FXCollections.observableArrayList(iFace.printBlacList()));
